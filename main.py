@@ -44,6 +44,7 @@ while isHidesInBank():
         print("No hide")
         openBank()
         sleep(1)
+        
         if isBankOpen():
             if isBankTabOpen():
                 continue

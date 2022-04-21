@@ -2,6 +2,7 @@ from time import sleep
 import pyautogui
 import pyclick
 from numpy import random
+from sympy import E
 
 bankTellerColor = (214, 183, 150)
 
@@ -37,6 +38,8 @@ def recordMissingItems():
 def openMagic():
     if not isMagicOpen():
         magicIcon = pyautogui.locateCenterOnScreen('./imgs/magicUnopened.png')#If the file is not a png file it will not work
+        if magicIcon == None:
+            print("Magic Icon Not found")
         move(magicIcon.x, magicIcon.y)
     
 def isMagicOpen():
@@ -65,6 +68,9 @@ def openBank():
                     move(x,y)
                     return
     
+def isBankPinPrompt():
+    print()
+    
 def isBankOpen():
     if pyautogui.locateCenterOnScreen('./imgs/bankOpened.png') or pyautogui.locateCenterOnScreen('./imgs/bankTabOpenedText.png'):
         return True
@@ -91,6 +97,12 @@ def isBankTabOpen():
 def withdrawHides():
     if isHidesInBank():
         hidesInBank = pyautogui.locateCenterOnScreen('./imgs/untannedHideInBank.png')#If the file is not a png file it will not work
+        if hidesInBank == None:
+            sleep(1)
+            hidesInBank = pyautogui.locateCenterOnScreen('./imgs/untannedHideInBank.png')
+            if hidesInBank == None:
+                print("Cant find hides in bank bro.")
+                quit()
         move(hidesInBank.x, hidesInBank.y)
     
 def isHidesInBank():
@@ -116,8 +128,18 @@ def closeBank():
     
 def castTanHide():
     hc = pyclick.HumanClicker()
-    spellLocation = pyautogui.locateCenterOnScreen('./imgs/tanHideSpell.png')#If the file is not a png file it will not work
+   # spellLocation = pyautogui.locateCenterOnScreen('./imgs/tanHideSpell.png')#If the file is not a png file it will not work
     move(1545,808) ## Meh fix to get working
     for i in range(4):
         hc.click()
-        sleep(3)
+        sleep(3.25)
+        
+def isPinUnlockOpen():
+    bankPinUnlock = pyautogui.locateCenterOnScreen('./imgs/bankPinUnlock.png')#If the file is not a png file it will not work
+    if bankPinUnlock == True:
+        return True
+    else:
+        return False
+    
+def unlockBank():
+    
