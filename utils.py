@@ -142,4 +142,4 @@ def isPinUnlockOpen():
         return False
     
 def unlockBank():
-    
+    print()
