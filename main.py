@@ -29,7 +29,11 @@
 from utils import *
 print('Side bar must be opened.')
 sleep(5)
+totalTrips = 0
 while isHidesInBank():
+    clearConsole()
+    print('Total Trips: ' + str(totalTrips))
+    print('Total Hide made: ' + str((totalTrips * 25)))
     itemsNeeded = recordMissingItems()
     print(itemsNeeded)
     outOfAstrals = itemsNeeded.get("astrals")
@@ -76,3 +80,4 @@ while isHidesInBank():
     withdrawHides()
     sleep(1)
     closeBank()
+    totalTrips = totalTrips + 1
