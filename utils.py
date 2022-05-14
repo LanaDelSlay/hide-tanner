@@ -3,6 +3,7 @@ import pyautogui
 import pyclick
 from numpy import random
 from sympy import E
+import os
 
 bankTellerColor = (214, 183, 150)
 
@@ -130,9 +131,9 @@ def castTanHide():
     hc = pyclick.HumanClicker()
    # spellLocation = pyautogui.locateCenterOnScreen('./imgs/tanHideSpell.png')#If the file is not a png file it will not work
     move(1545,808) ## Meh fix to get working
-    for i in range(4):
+    while isUntannedHideStillInInv() == True:
         hc.click()
-        sleep(3.25)
+        sleep(3)
         
 def isPinUnlockOpen():
     bankPinUnlock = pyautogui.locateCenterOnScreen('./imgs/bankPinUnlock.png')#If the file is not a png file it will not work
@@ -143,3 +144,19 @@ def isPinUnlockOpen():
     
 def unlockBank():
     print()
+    
+def clearConsole():
+    command = 'clear'
+    if os.name in ('nt', 'dos'):  # If Machine is running on Windows, use cls
+        command = 'cls'
+    os.system(command)
+    
+def isUntannedHideStillInInv():
+    im = pyautogui.screenshot()
+    px = im.getpixel((106, 832))
+    if px[0] == 93:
+        return False
+    if px[0] == 117:
+        return True
+    else: 
+        return "Unknown color - inv prolly empty"
